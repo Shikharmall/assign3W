@@ -3,31 +3,27 @@ import { Trophy, Gift } from "lucide-react"
 import { Button } from "../components/Button"
 import "../assets/RankingPage.css"
 import AddUserScreen from "./AddUser"
-import type { IUser } from "../constant/types"
+import type { IUser, UserData } from "../constant/types"
 import { assignUserPointsAPI, getAllUsersDetailsAPI } from "../api/UserAPI"
 
 export default function RankingScreen() {
     const [activeTab, setActiveTab] = useState("Leadership Board");
     const tabs = ["Leadership Board", "Add User"];
-
     const [users, setUsers] = useState<IUser[]>([]);
     const [usersTopThree, setUsersTopThree] = useState<IUser[]>([]);
     const [isLoadingTable, setIsLoadingTable] = useState<boolean>(false);
-    // const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [page, setPage] = useState<number>(1);
     const [totalUsers, setTotalUsers] = useState<number>(0);
 
     const getAllUserDetailsFunc = async (page: number, limit: number) => {
         setIsLoadingTable(true);
-        const usersData = await getAllUsersDetailsAPI(page, limit);
-        //console.log(usersData);
-        if (usersData?.status === 500) {
-            setIsLoadingTable(false);
-            return;
+        const usersData: UserData = await getAllUsersDetailsAPI(page, limit);
+        console.log(usersData);
+        if (usersData?.status === 200) {
+            setUsers(usersData?.data);
+            setTotalUsers(usersData?.total);
+            setUsersTopThree(usersData?.userTopThree);
         }
-        setUsers(usersData?.data);
-        setTotalUsers(usersData?.total);
-        setUsersTopThree(usersData?.userTopThree);
         setIsLoadingTable(false);
     }
 
@@ -83,7 +79,7 @@ export default function RankingScreen() {
 
                                 {/* Settlement Info */}
                                 <div className="settlement">
-                                    <span>Settlement time 2 days 01:45:27</span>
+                                    <span></span>
                                     <Button className="rewards-btn">
                                         <Gift className="icon" /> Rewards
                                     </Button>
@@ -120,49 +116,59 @@ export default function RankingScreen() {
                             {/* Ranked List */}
                             <div className="ranked-list">
                                 {
-                                    isLoadingTable && (
+                                    isLoadingTable ?
                                         <span className="ranked-name">Loading...</span>
+                                        :
+
+                                        <>
+                                            {
+                                                users?.map((user, index) => (
+                                                    <div key={user._id} className="ranked-user">
+                                                        <div className="ranked-left">
+                                                            {
+                                                                page === 1
+                                                                    ?
+                                                                    <span className="ranked-pos">{((page - 1) * 10) + index + 4}</span>
+                                                                    :
+                                                                    <span className="ranked-pos">{((page - 1) * 10) + index + 1}</span>
+                                                            }
+                                                            <img src={'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/young-woman-dark-hair-GXxiUY1an9Us8lytOYljuCsDg7lGjc.png'} alt={user?.name} className="ranked-avatar" />
+                                                            <span className="ranked-name">{user?.name}</span>
+                                                        </div>
+                                                        <div className="ranked-right">
+                                                            <span>{user?.points?.reduce((acc, item) => acc + item, 0) || 0} points</span>
+                                                            <Trophy size={20} color="#facc15" />
+                                                            <button
+                                                                onClick={() =>
+                                                                    claimPointsFunc(user?._id as string)
+                                                                }
+                                                                style={{
+                                                                    borderColor: 'red',
+                                                                    borderWidth: 1,
+                                                                    fontSize: 10,
+                                                                    color: '#f97316',
+                                                                    //scale: 3
+                                                                }}
+                                                            >Claim Points</button>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            }
+                                        </>
+
+                                }
+                                {
+                                    users?.length === 0 && (
+                                        <span className="ranked-name">No users.</span>
                                     )
                                 }
-                                {users?.map((user, index) => (
-                                    <div key={user._id} className="ranked-user">
-                                        <div className="ranked-left">
-                                            <span className="ranked-pos">{index + 4}</span>
-                                            <img src={'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/young-woman-dark-hair-GXxiUY1an9Us8lytOYljuCsDg7lGjc.png'} alt={user?.name} className="ranked-avatar" />
-                                            <span className="ranked-name">{user?.name}</span>
-                                        </div>
-                                        <div className="ranked-right">
-                                            <span>{user?.points?.reduce((acc, item) => acc + item, 0) || 0} points</span>
-                                            <Trophy size={20} color="#facc15" />
-                                            <button
-                                                onClick={() =>
-                                                    claimPointsFunc(user?._id as string)
-                                                }
-                                                style={{
-                                                    borderColor: 'red',
-                                                    borderWidth: 1,
-                                                    fontSize: 10,
-                                                    color: '#f97316',
-                                                    //scale: 3
-                                                }}
-                                            >Claim Points</button>
-                                        </div>
-                                    </div>
-                                ))}
 
 
                                 {/* Current User */}
                                 <div className="current-user">
                                     <div className="current-left">
                                         <button onClick={() => { setPage(page - 1) }} disabled={page === 1}>Previous</button><text>{page}</text> <button onClick={() => { setPage(page + 1) }} disabled={page === Math.floor(totalUsers / 10) + 1}>Next</button>
-                                        {/* <span className="current-rank">999+</span>
-                                        <div className="current-avatar">D</div>
-                                        <span className="current-name">Devil</span> */}
                                     </div>
-                                    {/* <div className="current-right">
-                                        <span>0</span>
-                                        <Trophy size={20} color="#facc15" />
-                                    </div> */}
                                 </div>
                             </div>
                         </>

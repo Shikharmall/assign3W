@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_URL_BASE } from "../utils/apiURL";
-import type { IUser } from "../constant/types";
+import type { IUser, UserData } from "../constant/types";
 
 // API for adding user
 
@@ -44,14 +44,27 @@ export const assignUserPointsAPI = async (userId: string) => {
 
 // API for getting all users details
 
-export const getAllUsersDetailsAPI = async (page: number, limit: number) => {
+export const getAllUsersDetailsAPI = async (page: number, limit: number): Promise<UserData> => {
     try {
-        let result = await axios(`${API_URL_BASE}/getAllUserDetails?page=${page}&limit=${limit}`, {
-            method: "GET",
+        const result = await axios.get(`${API_URL_BASE}/getAllUserDetails`, {
+            params: { page, limit },
             withCredentials: true,
         });
-        return result?.data;
-    } catch (error) {
-        return error;
+
+        return {
+            status: result.status, // numeric HTTP status
+            total: result.data?.total ?? 0,
+            userTopThree: result.data?.userTopThree ?? [],
+            data: result.data?.data ?? [],
+        };
+    } catch (error: any) {
+        console.error("getAllUsersDetailsAPI error:", error);
+
+        return {
+            status: error?.response?.status ?? 500,
+            total: 0,
+            userTopThree: [],
+            data: [],
+        };
     }
 };
