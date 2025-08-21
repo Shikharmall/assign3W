@@ -23,7 +23,7 @@ if (process.env.DATABASE === "MONGODB_ATLAS") {
 app.use(cookieParser());
 app.use(express.json());
 
-const allowedOrigins: string[] = ["http://localhost:5173"];
+const allowedOrigins: string[] = ["http://localhost:5173","https://assign3-w.vercel.app"];
 
 app.use(
   cors({
