@@ -1,0 +1,62 @@
+.input {
+  display: flex;
+  height: 36px; /* h-9 */
+  width: 100%;
+  min-width: 0;
+  border-radius: 6px; /* rounded-md */
+  border: 1px solid var(--input-border, #ccc);
+  background: transparent;
+  padding: 4px 12px; /* px-3 py-1 */
+  font-size: 1rem; /* text-base */
+  box-shadow: var(--shadow-xs, 0 1px 2px rgba(0,0,0,0.05));
+  outline: none;
+  transition: color 0.2s, box-shadow 0.2s;
+}
+
+.input::file-selector-button {
+  display: inline-flex;
+  height: 28px; /* h-7 */
+  border: 0;
+  background: transparent;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Placeholder */
+.input::placeholder {
+  color: var(--muted-foreground, #888);
+}
+
+/* Selection */
+.input::selection {
+  background: var(--primary, #0ab7f3);
+  color: var(--primary-foreground, #fff);
+}
+
+/* Disabled state */
+.input:disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Focus state */
+.input:focus-visible {
+  border-color: var(--ring, #0ab7f3);
+  box-shadow: 0 0 0 3px rgba(10, 183, 243, 0.5);
+}
+
+/* Invalid state */
+.input[aria-invalid="true"] {
+  border-color: var(--destructive, red);
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
