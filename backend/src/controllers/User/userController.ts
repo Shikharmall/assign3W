@@ -8,6 +8,7 @@ import type { IUser } from "../../constant/types.ts";
 export const addUser = async (req: Request, res: Response) => {
   try {
     const { name } = req.body;
+    
     // Find name if empty
 
     if (!name || name.trim().length === 0) {

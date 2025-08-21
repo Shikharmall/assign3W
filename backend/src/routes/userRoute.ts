@@ -1,5 +1,4 @@
 import express, { Router } from "express";
-import bodyParser from "body-parser";
 import {
     addUser,
     assignPoints,
@@ -7,10 +6,6 @@ import {
 } from "../controllers/User/userController";
 
 const userRouter: Router = express.Router();
-
-// Middleware
-userRouter.use(bodyParser.json());
-userRouter.use(bodyParser.urlencoded({ extended: true }));
 
 // API for adding user
 userRouter.post("/addUser", addUser);
