@@ -105,11 +105,11 @@ export const getAllUserDetails = async (req: Request, res: Response) => {
         $sort: { totalPoints: -1 }
       },
       {
-        $limit: limit || 10
+        $skip: skip
       },
       {
-        $skip: skip
-      }
+        $limit: limit || 10
+      },
     ]);
 
     return res.status(200).json({ status: "success", data: userData, total: userTotalData, userTopThree: userTopThreeData });
