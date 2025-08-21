@@ -306,7 +306,7 @@
 /* Current user */
 .current-user {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 12px;
     margin-top: 16px;
@@ -318,6 +318,7 @@
 .current-left {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
 }
 

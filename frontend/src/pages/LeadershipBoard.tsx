@@ -150,17 +150,19 @@ export default function RankingScreen() {
                                     </div>
                                 ))}
 
+
                                 {/* Current User */}
                                 <div className="current-user">
                                     <div className="current-left">
-                                        <span className="current-rank">999+</span>
+                                        <button onClick={() => { setPage(page - 1) }} disabled={page === 1}>Previous</button><text>{page}</text> <button onClick={() => { setPage(page + 1) }} disabled={page === Math.floor(totalUsers / 10) + 1}>Next</button>
+                                        {/* <span className="current-rank">999+</span>
                                         <div className="current-avatar">D</div>
-                                        <span className="current-name">Devil</span>
+                                        <span className="current-name">Devil</span> */}
                                     </div>
-                                    <div className="current-right">
+                                    {/* <div className="current-right">
                                         <span>0</span>
                                         <Trophy size={20} color="#facc15" />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </>
