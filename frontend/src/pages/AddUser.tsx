@@ -60,16 +60,6 @@ export default function AddUserScreen({ totalUsers, getAllUserDetailsFunc }: Add
                                             )} */}
                                             <Camera className="icon gray" />
                                         </div>
-                                        <label htmlFor="avatar-upload" className="avatar-upload">
-                                            <Upload className="icon small" />
-                                        </label>
-                                        <input
-                                            id="avatar-upload"
-                                            type="file"
-                                            accept="image/*"
-                                            //onChange={handleAvatarChange}
-                                            className="hidden"
-                                        />
                                     </div>
                                     <p className="avatar-hint">Tap to upload avatar</p>
                                 </div>
