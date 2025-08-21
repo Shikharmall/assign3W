@@ -72,9 +72,16 @@ export const assignPoints = async (req: Request, res: Response) => {
 export const getAllUserDetails = async (req: Request, res: Response) => {
   try {
 
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
-    const skip = (page - 1) * limit + 3;
+    const page: number = parseInt(req.query.page as string) || 1;
+    let limit: number = parseInt(req.query.limit as string) || 10;
+    let skip: number = 0;
+
+    if (page === 1) {
+      skip = (page - 1) * limit + 3;
+      limit = 7;
+    } else {
+      skip = (page - 1) * limit;
+    }
 
     // Top three users (highest first)
     const userTopThreeData: IUser[] = await User.aggregate([
