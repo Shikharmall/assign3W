@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Upload, User, Trophy, Camera } from "lucide-react";
+import { User, Trophy, Camera } from "lucide-react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/Card";
@@ -10,7 +10,6 @@ import type { AddUserScreenProps } from "../constant/types";
 export default function AddUserScreen({ totalUsers, getAllUserDetailsFunc }: AddUserScreenProps) {
     const [name, setName] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    // const [avatarPreview, setAvatarPreview] = useState<string | null>(null)
 
     const addUserFunc = async () => {
         setIsLoading(true);
@@ -22,13 +21,6 @@ export default function AddUserScreen({ totalUsers, getAllUserDetailsFunc }: Add
 
     return (
         <div className="adduser-container">
-            {/* Status Bar */}
-
-            {/* Header Navigation */}
-            {/* <div className="header-nav">
-                <h1 className="header-title">Add New User</h1>
-                <div className="header-spacer"></div>
-            </div> */}
 
             {/* Main Content */}
             <div className="main-content">
