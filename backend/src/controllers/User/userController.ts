@@ -1,6 +1,6 @@
-import generatePoints from "../../utils/generatePoints.ts";
+import generatePoints from "../../utils/generatePoints";
 import type { Request, Response } from "express";
-import User from "../../models/User/userModel.ts";
+import User from "../../models/User/userModel";
 import type { IUser } from "../../constant/types.ts";
 
 //adding the user
@@ -72,8 +72,9 @@ export const assignPoints = async (req: Request, res: Response) => {
 export const getAllUserDetails = async (req: Request, res: Response) => {
   try {
 
-    const { page, limit } = req.query;
-    const skip: number = (page - 1) * limit + 3;
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit + 3;
 
     // Top three users (highest first)
     const userTopThreeData: IUser[] = await User.aggregate([
@@ -104,7 +105,7 @@ export const getAllUserDetails = async (req: Request, res: Response) => {
         $sort: { totalPoints: -1 }
       },
       {
-        $limit: parseInt(limit) || 10
+        $limit: limit || 10
       },
       {
         $skip: skip

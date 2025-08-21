@@ -1,10 +1,10 @@
 import express from "express";
 import type { Application } from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import cors from "cors";
-import userRouter from "./routes/userRoute.ts";
+import userRouter from "./routes/userRoute";
 
 dotenv.config();
 

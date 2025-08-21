@@ -4,7 +4,7 @@ import {
     addUser,
     assignPoints,
     getAllUserDetails,
-} from "../controllers/User/userController.ts";
+} from "../controllers/User/userController";
 
 const userRouter: Router = express.Router();
 
