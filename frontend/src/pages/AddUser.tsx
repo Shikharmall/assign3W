@@ -11,13 +11,14 @@ export default function AddUserScreen({ totalUsers, getAllUserDetailsFunc }: Add
     const [name, setName] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const addUserFunc = async () => {
+    const addUserFunc = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         setIsLoading(true);
-        await addUserAPI({ name: name });
+        await addUserAPI({ name });
         getAllUserDetailsFunc(1, 10);
         setName("");
         setIsLoading(false);
-    }
+    };
 
     return (
         <div className="adduser-container">
@@ -40,7 +41,7 @@ export default function AddUserScreen({ totalUsers, getAllUserDetailsFunc }: Add
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <form className="form">
+                            <form className="form" onSubmit={addUserFunc}>
                                 {/* Avatar Upload */}
                                 <div className="avatar-section">
                                     <div className="avatar-wrapper">
@@ -77,7 +78,6 @@ export default function AddUserScreen({ totalUsers, getAllUserDetailsFunc }: Add
                                         type="submit"
                                         className="submit-btn"
                                         disabled={!name.trim()}
-                                        onClick={addUserFunc}
                                     >
                                         <Trophy className="icon small" />
                                         {isLoading ? "Adding..." : "Add User to Ranking"}

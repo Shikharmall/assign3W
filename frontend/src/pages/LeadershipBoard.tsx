@@ -18,7 +18,6 @@ export default function RankingScreen() {
     const getAllUserDetailsFunc = async (page: number, limit: number) => {
         setIsLoadingTable(true);
         const usersData: UserData = await getAllUsersDetailsAPI(page, limit);
-        console.log(usersData);
         if (usersData?.status === 200) {
             setUsers(usersData?.data);
             setTotalUsers(usersData?.total);
@@ -167,7 +166,7 @@ export default function RankingScreen() {
                                 {/* Current User */}
                                 <div className="current-user">
                                     <div className="current-left">
-                                        <button onClick={() => { setPage(page - 1) }} disabled={page === 1}>Previous</button><text>{page}</text> <button onClick={() => { setPage(page + 1) }} disabled={page === Math.floor(totalUsers / 10) + 1}>Next</button>
+                                        <button onClick={() => { setPage(page - 1) }} disabled={page === 1}>Previous</button> <p>{page}</p> <button onClick={() => { setPage(page + 1) }} disabled={page === Math.floor(totalUsers / 10) + 1}>Next</button>
                                     </div>
                                 </div>
                             </div>
