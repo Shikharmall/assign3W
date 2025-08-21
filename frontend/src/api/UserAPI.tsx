@@ -1,10 +1,10 @@
 import axios from "axios";
 import { API_URL_BASE } from "../utils/apiURL";
-import type { User } from "../constant/types";
+import type { IUser } from "../constant/types";
 
 // API for adding user
 
-export const addUserAPI = async (data: User) => {
+export const addUserAPI = async (data: IUser) => {
     try {
         let result = await axios(`${API_URL_BASE}/addUser`, {
             method: "POST",
