@@ -156,11 +156,9 @@ export default function RankingScreen() {
                                         </>
 
                                 }
-                                {
-                                    users?.length === 0 && (
-                                        <span className="ranked-name">No users.</span>
-                                    )
-                                }
+                                {!isLoadingTable && users?.length === 0 && (
+                                    <span className="ranked-name">No users.</span>
+                                )}
 
 
                                 {/* Current User */}
