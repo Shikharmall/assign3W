@@ -93,20 +93,40 @@ export default function RankingScreen() {
                                 <div className="podium">
                                     <div className="podium-card">
                                         <div className="podium-users">
-                                            {usersTopThree.map((user, index) => (
-                                                <div key={user._id} className="podium-user">
-                                                    <div className="user-avatar-wrapper">
-                                                        <img src={'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/young-woman-dark-hair-GXxiUY1an9Us8lytOYljuCsDg7lGjc.png'} alt={user.name} className="user-avatar" />
-                                                        {index === 0 && <div className="crown">👑</div>}
-                                                        <div className="position-badge">{index + 1}</div>
-                                                    </div>
-                                                    <p className="user-name">{user.name}</p>
-                                                    <div className="user-points">
-                                                        <Trophy size={16} color="#facc15" />
-                                                        <span>{user?.points?.reduce((acc, item) => acc + item, 0) || 0}</span>
-                                                    </div>
+                                            <div className="podium-user">
+                                                <div className="user-avatar-wrapper">
+                                                    <img src={'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/young-woman-dark-hair-GXxiUY1an9Us8lytOYljuCsDg7lGjc.png'} alt={usersTopThree[1]?.name} className="user-avatar" />
+                                                    <div className="position-badge">{2}</div>
                                                 </div>
-                                            ))}
+                                                <p className="user-name">{usersTopThree[1]?.name}</p>
+                                                <div className="user-points">
+                                                    <Trophy size={16} color="#facc15" />
+                                                    <span>{usersTopThree[1]?.points?.reduce((acc, item) => acc + item, 0) || 0}</span>
+                                                </div>
+                                            </div>
+                                            <div className="podium-user">
+                                                <div className="user-avatar-wrapper">
+                                                    <img src={'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/young-woman-dark-hair-GXxiUY1an9Us8lytOYljuCsDg7lGjc.png'} alt={usersTopThree[0]?.name} className="user-avatar" />
+                                                    <div className="crown">👑</div>
+                                                    <div className="position-badge">{1}</div>
+                                                </div>
+                                                <p className="user-name">{usersTopThree[0]?.name}</p>
+                                                <div className="user-points">
+                                                    <Trophy size={16} color="#facc15" />
+                                                    <span>{usersTopThree[0]?.points?.reduce((acc, item) => acc + item, 0) || 0}</span>
+                                                </div>
+                                            </div>
+                                            <div className="podium-user">
+                                                <div className="user-avatar-wrapper">
+                                                    <img src={'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/attachments/gen-images/public/young-woman-dark-hair-GXxiUY1an9Us8lytOYljuCsDg7lGjc.png'} alt={usersTopThree[2]?.name} className="user-avatar" />
+                                                    <div className="position-badge">{3}</div>
+                                                </div>
+                                                <p className="user-name">{usersTopThree[2]?.name}</p>
+                                                <div className="user-points">
+                                                    <Trophy size={16} color="#facc15" />
+                                                    <span>{usersTopThree[2]?.points?.reduce((acc, item) => acc + item, 0) || 0}</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
