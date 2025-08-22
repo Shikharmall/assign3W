@@ -116,7 +116,9 @@ export default function RankingScreen() {
                             <div className="ranked-list">
                                 {
                                     isLoadingTable ?
-                                        <span className="ranked-name">Loading...</span>
+                                        <center>
+                                            <span className="ranked-name">Loading...</span>
+                                        </center>
                                         :
 
                                         <>
@@ -157,14 +159,18 @@ export default function RankingScreen() {
 
                                 }
                                 {!isLoadingTable && users?.length === 0 && (
-                                    <span className="ranked-name">No users.</span>
+                                    <center>
+                                        <span className="ranked-name">No users.</span>
+                                    </center>
                                 )}
 
 
                                 {/* Current User */}
                                 <div className="current-user">
                                     <div className="current-left">
-                                        <button onClick={() => { setPage(page - 1) }} disabled={page === 1}>Previous</button> <p>{page}</p> <button onClick={() => { setPage(page + 1) }} disabled={page === Math.floor(totalUsers / 10) + 1}>Next</button>
+                                        <button onClick={() => { setPage(page - 1) }} disabled={page <= 1}>Previous</button>
+                                        <p>{page} of {Math.ceil(totalUsers / 10)}</p>
+                                        <button onClick={() => { setPage(page + 1) }} disabled={page >= Math.ceil(totalUsers / 10)}>Next</button>
                                     </div>
                                 </div>
                             </div>
