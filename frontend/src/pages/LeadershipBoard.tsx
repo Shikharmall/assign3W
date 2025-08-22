@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Trophy, Gift } from "lucide-react"
 import { Button } from "../components/Button"
-import "../assets/RankingPage.css"
+import "../assets/LeadershipBoard.css"
 import AddUserScreen from "./AddUser"
 import type { IUser, UserData } from "../constant/types"
 import { assignUserPointsAPI, getAllUsersDetailsAPI } from "../api/UserAPI"
