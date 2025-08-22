@@ -366,3 +366,21 @@
     height: 4px;
     background: #4b5563;
 }
+
+@media (max-width: 590px) {
+
+    /* Container */
+    .ranking-container {
+        max-width: 640px;
+        width: 400px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    /* Container */
+    .ranking-container {
+        max-width: 640px;
+        width: 360px;
+    }
+}
